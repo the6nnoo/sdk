@@ -656,6 +656,10 @@ class _HttpHeaders implements HttpHeaders {
   }
 
   static String _validateField(String field) {
+    if (field.isEmpty) {
+      throw FormatException(
+          "Invalid HTTP header field name: should not be empty", '', 0);
+    }
     for (var i = 0; i < field.length; i++) {
       if (!_HttpParser._isTokenChar(field.codeUnitAt(i))) {
         throw FormatException(
